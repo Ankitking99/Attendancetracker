@@ -1,0 +1,133 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LPM Q&A</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 50px;
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+    }
+    h1 {
+      margin-top: 0;
+    }
+    #question {
+      font-size: 18px;
+      font-weight: bold;
+    }
+    button {
+      margin-top: 10px;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    #answer {
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>LPM Q&A</h1>
+    <p id="question"></p>
+    <button id="showQuestion">Show Question</button>
+    <p id="answer"></p>
+    <button id="showAnswer">Show Answer</button>
+  </div>
+
+  <script>
+    const LPM = [
+      { question: "GVA % by livestock in India?", answer: "30.19%" },
+      { question: "Total milk production as per 2022-23 census.", answer: "230.58 million tonnes" },
+      { question: "Name top 5 milk producing states in our country?", answer: "(1)UP(2)Rajasthan(3)MP(4)Gujarat(5)Andhra Pradesh" },
+      { question: "PCA of milk?", answer: "459gm/day" },
+      { question: "States with highest PCA?", answer: "(1)Punjab(2)Rajasthan(3)Haryana(4)Andhra Pradesh" },
+      { question: "Total egg production in India according to 2022-23 census?", answer: "138.38 million tonnes" },
+      { question: "Top 5 egg producing states in India?", answer: "(1)Andhra Pradesh(2)Tamil Nadu(3)Telangana(4)West Bengal(5)Karnataka" },
+      { question: "What is the per capita availability of eggs?", answer: "101 eggs/person/annum" },
+      { question: "What is the total meat production in India?", answer: "9.77 million tonnes" },
+      { question: "What is the rank of India in the world's total meat production?", answer: "5th position" },
+      { question: "What is the rank of India in the world's total milk production?", answer: "1st position" },
+      { question: "What is the rank of India in the world's total egg production?", answer: "3rd position" },
+      { question: "What are the top 5 meat production states in India?", answer: "(1)UP(2)WB(3)Maharashtra(4)Andhra Pradesh(5)Telangana" },
+      { question: "PCA of meat production in India?", answer: "7.10 kg/person/annum" },
+      { question: "What is the total wool production in India?", answer: "33.61 million kg" },
+      { question: "What are the top 5 wool producing states in India?", answer: "(1)Rajasthan(2)J&K(3)Gujarat(4)Maharashtra(5)Himachal Pradesh" },
+      { question: "What is the job of NBAGR in India?", answer: "It registers breeds in India." },
+      { question: "Where is NBAGR located in India?", answer: "Karnal, Haryana" },
+      { question: "How many indigenous breeds of cattle are there in India?", answer: "53 breeds" },
+      { question: "How many indigenous breeds of buffalo are there in India?", answer: "20 breeds" },
+      { question: "How many indigenous breeds of goat are there in India?", answer: "39 breeds" },
+      { question: "How many indigenous breeds of sheep are there in India?", answer: "45 breeds" },
+      { question: "How many indigenous breeds of pig are there in India?", answer: "14 breeds" },
+      { question: "How many indigenous breeds of horse and ponies are there in India?", answer: "8 breeds" },
+      { question: "What is the job of NDRI in India?", answer: "Does research in milk." },
+      { question: "What is the job of CARI in India?", answer: "Does research in poultry." },
+      { question: "What is the job of CIRB in India?", answer: "Does research in buffaloes." },
+      { question: "What is the job of CIRC in India?", answer: "Does research in cattle." },
+      { question: "What is the job of CIRG in India?", answer: "Does research in goats." },
+      { question: "What is the job of CSWRI in India?", answer: "Does research in sheep and wool." },
+      { question: "What is the job of NRIP in India?", answer: "Does research in pigs." },
+      { question: "What is the job of NRIE in India?", answer: "Does research in equine (horse)." },
+      { question: "Where is NDRI in India?", answer: "Located in Karnal, Haryana" },
+      { question: "Where is CARI in India?", answer: "Located in Bareilly, Uttar Pradesh" },
+      { question: "Where is CIRB in India?", answer: "Located in Hisar, Haryana" },
+      { question: "Where is CIRC in India?", answer: "Located in Meerut, Uttar Pradesh" },
+      { question: "Where is CSWRI in India?", answer: "Located in Avikanagar, Rajasthan" },
+      { question: "Where is NRIP in India?", answer: "Located in Guwahati, Assam" },
+      { question: "Where is NRIE in India?", answer: "Located in Hisar, Haryana" },
+      { question: "What are the four pillars of LPM?", answer: "Housing, feeding, breeding, and healthcare." },
+      { question: "How many cattle are there in India according to 2020-21 census?", answer: "192 million" },
+      { question: "How many buffaloes are there in India according to 2020-21 census?", answer: "109.5 million" },
+      { question: "How many sheep are there in India according to 2020-21 census?", answer: "72.26 million" },
+      { question: "How many goats are there in India according to the 2020-21 census?", answer: "148.8 million" },
+      { question: "How many swine (pigs) are there in India according to 2020-21 census?", answer: "9.06 million" },
+      { question: "How many poultry are there in India according to 2020-21 census?", answer: "851.8 million" },
+      { question: "What is the rank of India in total cattle number according to the 2020-21 census?", answer: "Rank 1" },
+      { question: "What is the rank of India in total buffalo number according to the 2020-21 census?", answer: "Rank 1" },
+      { question: "What is the rank of India in total sheep number according to the 2020-21 census?", answer: "Rank 3" },
+      { question: "What is the rank of India in total goat number according to the 2020-21 census?", answer: "Rank 2" },
+      { question: "What is the rank of India in total swine number according to the 2020-21 census?", answer: "Rank 11" },
+      { question: "What is the rank of India in total poultry number according to the 2020-21 census?", answer: "Rank 7" }
+    ];
+
+    const questionElement = document.getElementById('question');
+    const answerElement = document.getElementById('answer');
+    const showQuestionButton = document.getElementById('showQuestion');
+    const showAnswerButton = document.getElementById('showAnswer');
+
+    let currentQuestion = null;
+    let remainingQuestions = [...LPM]; // Create a copy of the LPM array
+
+    showQuestionButton.addEventListener('click', () => {
+      if (remainingQuestions.length === 0) {
+        // If there are no remaining questions, reset the array
+        remainingQuestions = [...LPM];
+      }
+
+      const randomIndex = Math.floor(Math.random() * remainingQuestions.length);
+      currentQuestion = remainingQuestions[randomIndex];
+      questionElement.textContent = currentQuestion.question;
+      answerElement.textContent = '';
+
+      // Remove the selected question from the remaining questions array
+      remainingQuestions.splice(randomIndex, 1);
+    });
+
+    showAnswerButton.addEventListener('click', () => {
+      if (currentQuestion) {
+        answerElement.textContent = currentQuestion.answer;
+      }
+    });
+  </script>
+</body>
+</html>

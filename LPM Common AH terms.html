@@ -1,0 +1,146 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Common Animal Husbandry Terms Quiz</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 50px;
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+    }
+    h1 {
+      margin-top: 0;
+    }
+    #question {
+      font-size: 18px;
+      font-weight: bold;
+    }
+    button {
+      margin-top: 10px;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    #answer {
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Common Animal Husbandry Terms Quiz</h1>
+    <p id="question"></p>
+    <button id="showQuestion">Show Question</button>
+    <p id="answer"></p>
+    <button id="showAnswer">Show Answer</button>
+  </div>
+
+  <script>
+    const terms = [
+      { question: "Define Ruminant", answer: "Herbivorous animal with four chambered stomach (the stomach consists of rumen, reticulum, omasum and abomasum)." },
+      { question: "Define Cow", answer: "Female bovine that has calved at least once." },
+      { question: "Define Bull", answer: "A sexually matured male bovine that is not castrated. (Fertile - useful for crossing)" },
+      { question: "Define Stud bull", answer: "Bull used for breeding" },
+      { question: "Define Scrub bull", answer: "Non-descript type of bulls whose characters are not in conformity with any recognized breed and are not used for breed development." },
+      { question: "Define Bullock/steer", answer: "A male bovine castrated at more than or over two years." },
+      { question: "Define Calf", answer: "Young bovine under one year of age." },
+      { question: "Define Heifer", answer: "A female bovine that has not yet calved." },
+      { question: "Define Bull Calf", answer: "Male bovine young one under one year." },
+      { question: "Define Heifer calf", answer: "Female bovine young one under one year." },
+      { question: "Define Paunch", answer: "Rumen is also known as paunch." },
+      { question: "Define Freemartin", answer: "When twin calves (of cattle) of different sexes are born, female calf is usually sterile. Such calf is called as 'Freemartin'." },
+      { question: "Define Slink calves", answer: "Those calves that are found in uterus during slaughter." },
+      { question: "Define Dam", answer: "Female parent of cattle" },
+      { question: "Define Sire", answer: "Male parent of cattle" },
+      { question: "Define Sheep (common gender)", answer: "Sheep - Common gender." },
+      { question: "Define Ram or Tup", answer: "An adult male sheep used for breeding." },
+      { question: "Define Ewe", answer: "An adult female sheep." },
+      { question: "Define Lamb", answer: "A young sheep of either sex." },
+      { question: "Define Ram lamb", answer: "A male young sheep." },
+      { question: "Define Ewe lamb", answer: "A female young sheep." },
+      { question: "Define Wedder or Wether", answer: "An adult castrated male sheep." },
+      { question: "Define Crone", answer: "An old broken mouthed ewe which has been retained in a breeding flock because of her excellent breeding performance." },
+      { question: "Define Gimmer", answer: "A female sheep which is between 1 and 2 shearing." },
+      { question: "Define Saggy", answer: "A ram castrated after service." },
+      { question: "Define Yeld", answer: "A barren or non lactating animal." },
+      { question: "Define Shearing", answer: "Removal of wool from sheep." },
+      { question: "Define Lambing", answer: "The act of a ewe giving birth to a lamb." },
+      { question: "Define Goat (common gender)", answer: "Goat - Common gender" },
+      { question: "Define Buck", answer: "An adult male goat used for breeding." },
+      { question: "Define Doe", answer: "An adult female goat." },
+      { question: "Define Buckling", answer: "A male goat over 1 year but not exceeding 2 years of age." },
+      { question: "Define Goatling", answer: "A female goat over 1 year but not exceeding 2 years of age." },
+      { question: "Define Kid", answer: "A young goat of either sex." },
+      { question: "Define Kidding", answer: "The act of a doe giving birth to a kid." },
+      { question: "Define Boar", answer: "An adult uncastrated male pig used for breeding." },
+      { question: "Define Sow", answer: "An adult female pig used for breeding." },
+      { question: "Define Stag or Hog or barrow", answer: "A castrated male pig." },
+      { question: "Define Gilt", answer: "A young female pig kept for breeding." },
+      { question: "Define Open Gilt", answer: "A young female pig which has not been served" },
+      { question: "Define Closed Gilt", answer: "A young female pig which has become pregnant." },
+      { question: "Define Store Pig", answer: "Pigs between weaning and fattening usually between 8 and about 15 weeks old." },
+      { question: "Define Runt or cad or crit or critling", answer: "The last young one farrowed in a litter. It is usually small." },
+      { question: "Define Farrowing", answer: "The act of a sow giving birth to piglets." },
+      { question: "Define Stallion", answer: "Adult male horse" },
+      { question: "Define Mare", answer: "Adult female horse" },
+      { question: "Define Foal", answer: "A young horse of either sex." },
+      { question: "Define Colt", answer: "Young male horse" },
+      { question: "Define Filly", answer: "Young female horse" },
+      { question: "Define Geld / Gelding", answer: "Castrated male horse" },
+      { question: "Define Foaling", answer: "The act of a mare giving birth to a foal." },
+      { question: "Define Dog", answer: "An adult male dog." },
+      { question: "Define Bitch", answer: "An adult female dog." },
+      { question: "Define Pup", answer: "A young dog of either sex." },
+      { question: "Define Whelping", answer: "The act of a bitch giving birth to puppies." },
+      { question: "Define Cat (common gender)", answer: "Cat - Common gender" },
+      { question: "Define Tom Cat", answer: "An adult uncastrated male cat." },
+      { question: "Define Queen Cat", answer: "An adult female cat." },
+      { question: "Define Neuter", answer: "A castrated cat" },
+      { question: "Define Kitten", answer: "A young cat of either sex." },
+      { question: "Define Queening", answer: "The act of a queen cat giving birth to kittens." },
+      { question: "Define Buck (rabbit)", answer: "An adult male rabbit used for breeding." },
+      { question: "Define Doe (rabbit)", answer: "An adult female rabbit." },
+      { question: "Define Bunny", answer: "A young rabbit of either sex." },
+      { question: "Define Kindling", answer: "The act of a doe rabbit giving birth to kits." }
+    ];
+
+    const questionElement = document.getElementById('question');
+    const answerElement = document.getElementById('answer');
+    const showQuestionButton = document.getElementById('showQuestion');
+    const showAnswerButton = document.getElementById('showAnswer');
+
+    let currentQuestion = null;
+    let remainingQuestions = [...terms]; // Create a copy of the terms array
+
+    showQuestionButton.addEventListener('click', () => {
+      if (remainingQuestions.length === 0) {
+        // If there are no remaining questions, reset the array
+        remainingQuestions = [...terms];
+      }
+
+      const randomIndex = Math.floor(Math.random() * remainingQuestions.length);
+      currentQuestion = remainingQuestions[randomIndex];
+      questionElement.textContent = currentQuestion.question;
+      answerElement.textContent = '';
+
+      // Remove the selected question from the remaining questions array
+      remainingQuestions.splice(randomIndex, 1);
+    });
+
+    showAnswerButton.addEventListener('click', () => {
+      if (currentQuestion) {
+        answerElement.textContent = currentQuestion.answer;
+      }
+    });
+  </script>
+</body>
+</html>

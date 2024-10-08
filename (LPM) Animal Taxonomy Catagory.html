@@ -1,0 +1,128 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Animal Taxonomy Quiz</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 50px;
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+    }
+    h1 {
+      margin-top: 0;
+    }
+    #question {
+      font-size: 18px;
+      font-weight: bold;
+    }
+    button {
+      margin-top: 10px;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    #answer {
+      white-space: pre-wrap;
+      text-align: left;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Animal Taxonomy Quiz</h1>
+    <p id="question"></p>
+    <button id="showQuestion">Show Question</button>
+    <p id="answer"></p>
+    <button id="showAnswer">Show Answer</button>
+  </div>
+
+  <script>
+    const taxonomy = [
+      {
+        question: "What is the taxonomic classification of Zebu Cattle?",
+        answer: "Kingdom: Animalia\nPhylum: Chordata\nClass: Mammalia\nSub-Class: Eutheria\nOrder: Ungulata\nSub-Order: Artiodactyla\nFamily: Bovidae\nGenus: Bos\nSpecies: indicus"
+      },
+      {
+        question: "What is the taxonomic classification of Exotic Cattle?",
+        answer: "Kingdom: Animalia\nPhylum: Chordata\nClass: Mammalia\nSub-Class: Eutheria\nOrder: Ungulata\nSub-Order: Artiodactyla\nFamily: Bovidae\nGenus: Bos\nSpecies: taurus"
+      },
+      {
+        question: "What is the taxonomic classification of Buffalo?",
+        answer: "Kingdom: Animalia\nPhylum: Chordata\nClass: Mammalia\nSub-Class: Eutheria\nOrder: Ungulata\nSub-Order: Artiodactyla\nFamily: Bovidae\nGenus: Bubalus\nSpecies: bubalis"
+      },
+      {
+        question: "What is the taxonomic classification of Goat?",
+        answer: "Kingdom: Animalia\nPhylum: Chordata\nClass: Mammalia\nSub-Class: Eutheria\nOrder: Ungulata\nSub-Order: Artiodactyla\nFamily: Capridae\nGenus: Capra\nSpecies: hircus"
+      },
+      {
+        question: "What is the taxonomic classification of Sheep?",
+        answer: "Kingdom: Animalia\nPhylum: Chordata\nClass: Mammalia\nSub-Class: Eutheria\nOrder: Ungulata\nSub-Order: Artiodactyla\nFamily: Ovidae\nGenus: Ovis\nSpecies: aries"
+      },
+      {
+        question: "What is the taxonomic classification of Pig?",
+        answer: "Kingdom: Animalia\nPhylum: Chordata\nClass: Mammalia\nSub-Class: Eutheria\nOrder: Ungulata\nSub-Order: Artiodactyla\nFamily: Suidae\nGenus: Sus\nSpecies: domesticus"
+      },
+      {
+        question: "What is the taxonomic classification of Camel?",
+        answer: "Kingdom: Animalia\nPhylum: Chordata\nClass: Mammalia\nSub-Class: Eutheria\nOrder: Ungulata\nSub-Order: Artiodactyla\nFamily: Camelidae\nGenus: Camelus\nSpecies: dromedarius"
+      },
+      {
+        question: "What is the taxonomic classification of Horse?",
+        answer: "Kingdom: Animalia\nPhylum: Chordata\nClass: Mammalia\nSub-Class: Eutheria\nOrder: Ungulata\nSub-Order: Perissodactyla\nFamily: Equidae\nGenus: Equus\nSpecies: caballus"
+      },
+      {
+        question: "What is the taxonomic classification of Donkey?",
+        answer: "Kingdom: Animalia\nPhylum: Chordata\nClass: Mammalia\nSub-Class: Eutheria\nOrder: Ungulata\nSub-Order: Perissodactyla\nFamily: Equidae\nGenus: Equus\nSpecies: asinus"
+      },
+      {
+        question: "What is the taxonomic classification of Dog?",
+        answer: "Kingdom: Animalia\nPhylum: Chordata\nClass: Mammalia\nSub-Class: Eutheria\nOrder: Carnivora\nSub-Order: -\nFamily: Canidae\nGenus: Canis\nSpecies: familiaris"
+      },
+      {
+        question: "What is the taxonomic classification of Cat?",
+        answer: "Kingdom: Animalia\nPhylum: Chordata\nClass: Mammalia\nSub-Class: Eutheria\nOrder: Carnivora\nSub-Order: -\nFamily: Felidae\nGenus: Felis\nSpecies: domesticus"
+      },
+      {
+        question: "What is the taxonomic classification of Rabbit?",
+        answer: "Kingdom: Animalia\nPhylum: Chordata\nClass: Mammalia\nSub-Class: Eutheria\nOrder: Lagomorpha\nSub-Order: -\nFamily: Leporidae\nGenus: Oryctolagus\nSpecies: cuniculus"
+      }
+    ];
+
+    const questionElement = document.getElementById('question');
+    const answerElement = document.getElementById('answer');
+    const showQuestionButton = document.getElementById('showQuestion');
+    const showAnswerButton = document.getElementById('showAnswer');
+
+    let currentQuestion = null;
+    let remainingQuestions = [...taxonomy];
+
+    showQuestionButton.addEventListener('click', () => {
+      if (remainingQuestions.length === 0) {
+        remainingQuestions = [...taxonomy];
+      }
+
+      const randomIndex = Math.floor(Math.random() * remainingQuestions.length);
+      currentQuestion = remainingQuestions[randomIndex];
+      questionElement.textContent = currentQuestion.question;
+      answerElement.textContent = '';
+
+      remainingQuestions.splice(randomIndex, 1);
+    });
+
+    showAnswerButton.addEventListener('click', () => {
+      if (currentQuestion) {
+        answerElement.textContent = currentQuestion.answer;
+      }
+    });
+  </script>
+</body>
+</html>
